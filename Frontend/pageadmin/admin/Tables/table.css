@@ -1,0 +1,14 @@
+.description-column {
+    max-width: 300px;  
+    overflow: auto;   
+    white-space: nowrap;
+}
+
+  th, td {
+    max-width: 200px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+  }
+
+   

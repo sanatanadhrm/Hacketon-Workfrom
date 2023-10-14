@@ -1,0 +1,24 @@
+.image-info {
+    display: flex;
+    align-items: center;
+}
+
+.image-info img {
+    max-height: 35px;
+    margin-right: 10px;
+}
+
+.next-btn {
+    /* bottom: 20px; 
+    right: 20px;  */
+    margin-left: 10px;
+    
+}
+.button{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+    padding: 20px;
+}
+

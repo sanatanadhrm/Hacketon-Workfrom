@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workfrom.id</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-5" href="home.html">
+                <img src="https://workfrom.id/wp-content/uploads/2022/12/Logo-WF.png" alt="Bootstrap" width="150" height="24">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto mx-5">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-3" href="home.html#aboutUs">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contactUs">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+    <section>
+        <div class="container">
+            <h1 class="listing pt-5">Listing</h1>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="home.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Listing</li>
+                </ol>
+            </nav>
+            <div class="row py-3">
+                <div class="col-md-5">
+                    <h3>Location</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle pe-5 py-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Location
+                        </button>
+                        <ul id="city-dropdown" class="dropdown-menu">
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex justify-content-end">
+                        <div class="container-fluid">
+                          <form class="d-flex">
+                            <input id="location-input-123" class="form-control me-2"  placeholder="Location... " >
+                            <button class="btn btn-outline-secondary" type="button" onclick="search()">Search</button>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sorted-cards-container row mt-4"></div>
+    </section>
+        <section>
+            <div id="container-123" class="container pb-4">
+                <div class="row mt-4"></div>
+            </div>
+            
+            <script>
+                const container = document.getElementById('container-123');
+                const urlParams = new URLSearchParams(window.location.search);
+                const cityId = urlParams.get('city');
+
+
+                const loadData = async () => {
+                    try {
+                        const response = await fetch('http://localhost:8000/property');
+                        const data = await response.json();
+                        const properties = data.data.properties;
+                        loadUserData(properties);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                };
+
+                const loadUserData = (data) => {
+                    if (!Array.isArray(data)) {
+                        console.error('Data is not an array.');
+                        return;
+                    }
+                    const cityDropdown = document.getElementById('city-dropdown');
+                    const uniqueCity = [];
+                    const filteredData = data.filter(item => {
+                        let city = item.city.toLowerCase();
+                    if (!uniqueCity[city]) {
+                        uniqueCity[city] = true;
+                        return true;
+                    }
+                    return false;
+                    });
+                    const output = `<li><a href="listing.html?city=all" class="dropdown-item" data-value="all" href="#">All</a></li>` + 
+                    filteredData.map((el) => {
+                        return `<li><a href="listing.html?city=${el.city}" class="dropdown-item" data-value="${el.city}" href="#">${el.city}</a></li>`;
+                    }).join('');
+                    cityDropdown.innerHTML = output;
+                    let dropdownItems = document.querySelectorAll('.dropdown-item');
+                    dropdownItems.forEach((item) => {
+                        item.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            const selectedCity = event.target.getAttribute('data-value');
+                            loadFilteredDataByCity(selectedCity);
+                        });
+                    });
+                    let row = null;
+                    data.forEach((property, index) => {
+                        if (index % 3 === 0) {
+                            row = document.createElement('div');
+                            row.classList.add('row', 'mt-4');
+                            container.appendChild(row);
+                        }
+
+                        const col = document.createElement('div');
+                        col.classList.add('col-md-4');
+
+                        const card = document.createElement('div');
+                        card.classList.add('card');
+                        card.dataset.location = property.location;
+                        card.style.width = '100%';
+
+                        const imgLink = document.createElement('a');
+                        imgLink.href = `product-page.html?id=${property.id}`;
+                        const cardImg = document.createElement('img');
+                        cardImg.classList.add('card-img-top');
+                        cardImg.src = 'image/Space.jpeg';
+                        cardImg.height = '433';
+                        cardImg.alt = 'card';
+                        imgLink.appendChild(cardImg);
+                        card.appendChild(imgLink);
+                            
+
+                        const cardBody = document.createElement('div');
+                        cardBody.classList.add('card-body');
+
+                        const cardTitle = document.createElement('h5');
+                        cardTitle.classList.add('card-title');
+                        cardTitle.innerText = property.name;
+                        cardBody.appendChild(cardTitle);
+
+                        const cardText = document.createElement('p');
+                        cardText.classList.add('card-text');
+                        cardText.innerText = property.location;
+                        cardText.style.maxHeight = '200px';
+                        cardText.style.maxWidth = '100%';
+                        cardText.style.whiteSpace = 'nowrap';
+                        cardText.style.overflow = 'hidden';
+                        cardBody.appendChild(cardText);
+
+                        const locationIcon = document.createElement('img');
+                        locationIcon.src = 'image/location.svg';
+                        locationIcon.width = '30';
+                        locationIcon.height = '30';
+                        locationIcon.alt = '';
+                        cardBody.appendChild(locationIcon);
+
+                        const locationText = document.createElement('span');
+                        locationText.innerText = ` ${property.city}`;
+                        cardBody.appendChild(locationText);
+
+                        const providerText = document.createElement('p');
+                        providerText.classList.add('my-2');
+                        providerText.innerHTML = `<b>${property.name}</b>`;
+                        cardBody.appendChild(providerText);
+
+                        card.appendChild(cardBody);
+                        col.appendChild(card);
+
+                        row.appendChild(col);
+                    });
+                };
+
+                const loadFilteredDataByCity = async (selectedCity) => {
+                    clearContainer();
+                    if (selectedCity === 'all') {
+                        loadData(); // Menampilkan semua data jika "all" dipilih
+                    } else {
+                        const cityValue = selectedCity.toUpperCase();
+                        try {
+                            const response = await fetch(`http://localhost:8000/property/${cityValue}`);
+                            const data = await response.json();
+                            const cityProperties = data.data.properties;
+                            loadUserData(cityProperties);
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+                }
+
+                const clearContainer = () => {
+                    while (container.firstChild) {
+                        container.removeChild(container.firstChild);
+                    }
+                };
+
+                function search() {
+                    const locationInput = document.getElementById('location-input-123');
+                    const locationValue = locationInput.value;
+
+                    if (locationValue) {
+                        // Encode the location value to handle special characters
+                        const encodedLocationValue = encodeURIComponent(locationValue);
+
+                        // Redirect to the desired page with the city parameter
+                        window.location.href = `listing.html?city=${encodedLocationValue}`;
+                    }
+                }
+                if (cityId) {
+                    loadFilteredDataByCity(cityId);
+                }else{
+                    loadData();
+                }
+            </script>
+        </section>
+<footer style="background-color: #D9D9D9;">
+    <div class="row mx-auto">
+        <div class="col-lg-2 ms-0 my-4 ms-4 mx-auto">
+            <img src="https://workfrom.id/wp-content/uploads/2022/12/Logo-WF.png" class="mb-2" alt="">
+            <h5>About Company</h5>
+            <p>Komp. Ruko Centre Point Medan Jalan <br>Timor Blok G No. III/IV 2nd Floor, Gang <br>Buntu,Medan Timur,Medan City,North <br>Sumatra 20231</p>
+        </div>
+        <div class="col-lg-3 my-4">
+            <h5 class="my-4">Telusuri</h5>
+                <ul class="list-unstyled">
+                    <li class="nav-item mb-3">Nasional</li>
+                    <li class="nav-item mb-3">Internasional</li>
+                    <li class="nav-item mb-3">Ekonomi</li>
+                </ul>
+        </div>
+        <div class="col-lg-3 my-5">
+            <ul class="list-unstyled">
+                <li class="nav-item mb-3">Olahraga</li>
+                <li class="nav-item mb-3">Teknologi</li>
+                <li class="nav-item mb-3">Otomotif</li>
+            </ul>
+        </div>
+        <div class="col-lg-3 my-5">
+            <h5>Contact Us.</h5>
+            <img src="image/whatsapp-icon.svg" class="mx-2" width="30" height="30" id="contactUs" alt="">082899213737
+        </div>
+
+        <div class="col-lg-3 my-5 mb-0">
+            <p>©2022 Workfrom.id. All rights reserved</p>
+        </div>
+    </div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let dropdownItems = document.querySelectorAll('.dropdown-item');
+    let container = document.querySelector('.sorted-cards-container');
+    let cards = document.querySelectorAll('.card');
+
+    dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            let selectedLocation = this.getAttribute('data-value');
+            let visibleCardContainers = [];
+
+            cards.forEach(function(card) {
+                if (selectedLocation === "all") {
+                    card.style.display = ''; 
+                    visibleCardContainers.push(card.parentElement);
+                } else {
+                    if (card.getAttribute('data-location') === selectedLocation) {
+                        card.style.display = '';
+                        visibleCardContainers.push(card.parentElement);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            // Kosongkan container sebelum menambahkan kartu
+            container.innerHTML = '';
+
+            // Tambahkan kartu yang ditampilkan ke container
+            visibleCardContainers.forEach(function(cardContainer) {
+                container.appendChild(cardContainer);
+            });
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    let dropdownItems = document.querySelectorAll('.dropdown-item');
+    let dropdownButton = document.querySelector('.btn.dropdown-toggle');
+
+    dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function(event) {
+            event.preventDefault(); // Hentikan tautan dari navigasi
+            dropdownButton.textContent = this.textContent;
+        });
+    });
+});
+
+
+
+</script>
+</body>

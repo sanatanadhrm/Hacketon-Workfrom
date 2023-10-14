@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="sidebar-mini layout-fixed sidebar-collapse">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="admin.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+        </nav>
+        <aside class="main-sidebar sidebar-dark-primary elevation-0">
+            <div class="sidebar">
+                <!--Sidebar user panel (optional)-->
+                <div class="user-panel mt-3 pb-4 mb-3">
+                    <div class="image-info d-flex align-items-center pl-3">
+                        <img src="../dist/img/Workfrom.png" style="max-height: 35px; margin-right: 10px;">
+                        <a href="../admin.html" class="d-block">Admin Dashboard</a>
+                    </div>
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="../admin.html" class="nav-link">
+                                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                                  <p>
+                                    Dashboard
+                                  </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                          <li class="nav-item">
+                            <a href="properties.html" class="nav-link">
+                              <i class="nav-icon fas fa-edit"></i>
+                              <p>
+                                Forms
+                              </p>
+                            </a>
+                          </li>
+                        </ul>
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="nav-icon fas fa-table"></i>
+                              <p>
+                                Tables
+                              </p>
+                              <i class="fas fa-angle-left right"></i>
+                            </a>
+                            <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                <a href="../Tables/table-property.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Tabel Property</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="../Tables/table-plans-pricing.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Table Plans & Pricing</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="../Tables/table-amenities.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Table Amenities</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="../Tables/table-nearby.html" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Table Nearby</p>
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </aside>
+
+
+
+        <div class="content-wrapper" style="min-height: 855px;">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Properties</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="../admin.html">Home</a></li>
+                                <li class="breadcrumb-item active">Properties</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Input Prices</h3>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row"> <!-- New row for the Duration -->
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="name-123">Name</label>
+                                            <input id="name-123" type="text" class="form-control" placeholder="Enter ..." maxlength="255">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Owner</label>
+                                            <input id="owner-123" type="text" class="form-control" placeholder="Enter ..." maxlength="255">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Contact</label>
+                                            <input id="contact-123" type="text" class="form-control" placeholder="Enter ..." maxlength="255">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row"> <!-- New row for the Duration -->
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input id="city-123" type="text" class="form-control" placeholder="Enter ..." maxlength="255">
+                                        </div>
+                                    </div> <!-- New row for the Duration -->
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Location</label>
+                                            <input id="location-123" type="text" class="form-control" placeholder="Enter ..." maxlength="255">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row"> <!-- New row for the Duration -->
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea id="description-123" class="form-control" rows="5" placeholder="Enter ..." ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>        
+            <!-- <a href="pricing.html"> -->
+                <div class="button">
+                    <button id="back-button" style="display: block" onclick="postProperty(this)" class="btn btn-primary next-btn" value="back">Add Property & Back</button>
+                    <button id="edit-button" style="display: none" type="button"  onclick="putProperty(this)" class="btn btn-primary next-btn" value="edit">Edit Property & Back</button> 
+                    <button id="next-button" style="display: block" onclick="postProperty(this)" class="btn btn-primary next-btn" value="next">Add Property & Next</button> 
+                </div>
+                <!-- <button class="btn btn-primary next-btn" onclick="stepper.previous()">Previous</button>
+                <button class="btn btn-primary next-btn" onclick="stepper.next()">Next</button>                -->
+            <!-- </a> -->
+            <script>
+                document.addEventListener('DOMContentLoaded', (event) => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const id = urlParams.get('id');
+
+                    if (id) {
+                        // Jika URL memiliki ID, tampilkan tombol "Edit Property & Back"
+                        document.getElementById('edit-button').style.display = 'block';
+                        document.getElementById('next-button').style.display = 'none';
+                        document.getElementById('back-button').style.display = 'none';
+                    }
+                });
+                 async function postProperty(button) {
+                    // Mendapatkan nilai dari masing-masing input
+                    const formData = {
+                        name: document.getElementById('name-123').value,
+                        owner: document.getElementById('owner-123').value,
+                        city: document.getElementById('city-123').value.toUpperCase(),
+                        location: document.getElementById('location-123').value,
+                        contact: document.getElementById('contact-123').value,
+                        description: document.getElementById('description-123').value
+                    };
+                    // Menampilkan nilai pada console
+                    console.log(formData);
+                    const valueButton = button.value;
+                    // Atau tampilkan nilai dalam alert
+                    try {
+                    const response = await fetch('http://localhost:8000/property', {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const data = await response.json();
+                    console.log('Data berhasil terkirim. Response:', data.data.propertyId);
+
+                    if(valueButton === "back"){
+                        alert('Data berhasil terkirim. Silahkan kembali ke halaman sebelumnya.');
+                        window.location.href = `../Tables/table-property.html`;
+                    }else{
+                        alert('Data berhasil terkirim. Silahkan kembali ke halaman selanjutnya.');
+                        window.location.href = `pricing.html?id=${data.data.propertyId}`;
+                    }
+                    // Setelah alert ditutup, redirect ke halaman success.html
+                    } catch (error) {
+                    alert('Error:', error);
+                    }
+                }
+
+                async function putProperty(button) {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const id = urlParams.get('id');
+                    if (!id) {
+                    alert('ID tidak ditemukan dalam URL.');
+                    return;
+                    }
+
+                    const formData = {
+                        name: document.getElementById('name-123').value,
+                        owner: document.getElementById('owner-123').value,
+                        city: document.getElementById('city-123').value.toUpperCase(),
+                        location: document.getElementById('location-123').value,
+                        contact: document.getElementById('contact-123').value,
+                        description: document.getElementById('description-123').value
+                    };
+                    const valueButton = button.value;
+                    try {
+                    const response = await fetch(`http://localhost:8000/property/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const data = await response.json();
+                    console.log('Data berhasil terkirim. Response:', data);
+                    alert('Data berhasil diedit. Silahkan kembali ke halaman utama.');
+
+                    // Setelah alert ditutup, redirect ke halaman success.html
+                    window.location.href = '../Tables/table-property.html';
+                    } catch (error) {
+                    console.error('Error:', error);
+                    }
+                }
+            </script>
+        </div>
+       
+</body>
+
+<!-- jQuery -->
+<script src="../plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="../plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="../plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="../plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="../plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="../plugins/moment/moment.min.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="../plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="../dist/js/pages/dashboard.js"></script>
+<!-- Fetch menggunakan JS -->
+<!-- <script src="../js/fetch.js"></script> -->
